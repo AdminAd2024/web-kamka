@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Веб-камКА</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://cdn-icons-png.flaticon.com/512/3617/3617090.png" type="image/ico" rel="shortcut icon">
+    <style>
+        .video {
+            width: 500px;
+            height: 400px;
+            border: 2px solid red;
+            position: relative;
+        }
+
+        video {
+            width: 500px;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .about-website:hover {
+            background-color: red;
+        }
+
+        .developer:hover {
+            background-color: red;
+        }
+    </style>
+
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+</style>
+
+</head>
+
+<body onload="startTime()" style="font-family: 'Open Sans', sans-serif;">
+
+<header style="background-image: linear-gradient(red, orange);display: flex;align-items: center;box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;border-radius: 10px;padding: 10px;">
+  <h1 style="color: #fff;">Веб-камКА</h1>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <p style="color: #fff;">Текущий год:&nbsp;<span id="year">
+        <script>document.getElementById('year').appendChild(document.createTextNode(new Date().getFullYear()))</script>
+    </span></p>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <p onclick="aboutWebsite()" title="О сайте" class="about-website" style="color: #fff;cursor: pointer;">О сайте</p>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <p onclick="Developer()" title="Разработчик" class="developer" style="color: #fff;cursor: pointer;">Разработчик</p>
+</header>
+
+<script>
+function aboutWebsite() {
+  alert("Сайт был создан: 2024.08.25 23:33:01. Тип сайта: HTML.");
+}
+</script>
+
+<script>
+function Developer() {
+  alert("Марк Вежялис");
+}
+</script>
+
+<div class="message" style="display: flex;align-items: center;"><h2>Просмотр</h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p style="background: yellow;color: red;">Примечание: что-бы активировать веб-камеру, нажмите на кнопку «Включить веб-камеру».</p></div>
+<div id="displayyearmonthdayclock" style="display: none;"><div class="clock" style="display: flex;align-items: center;background: black;color: white;width: 504px;height: 30px;"><p style="font-family: 'ＭＳ Ｐゴシック';font-weight: bold;font-size: 20px;" id="YEar"></p>&nbsp;&nbsp;<p style="font-family: 'ＭＳ Ｐゴシック';font-weight: bold;" id="MonTH"></p>&nbsp;&nbsp;<p style="font-family: 'ＭＳ Ｐゴシック';font-weight: bold;font-size: 20px;" id="daTE"></p>&nbsp;&nbsp;<p style="font-family: 'ＭＳ Ｐゴシック';font-weight: bold;font-size: 20px;" id="clock"></p></div></div>
+
+<script>
+const months = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
+
+const m = new Date();
+let month = months[m.getMonth()];
+document.getElementById("MonTH").innerHTML = month;
+</script>
+
+<script>
+const day = new Date();
+document.getElementById("daTE").innerHTML = day.getDate();
+</script>
+
+<script>
+const y = new Date();
+document.getElementById("YEar").innerHTML = y.getFullYear();
+</script>
+
+
+    <div class="video">
+      <video id="vid"></video>
+    </div>
+
+    <script>
+    function startTime() {
+      const today = new Date();
+      let h = today.getHours();
+      let m = today.getMinutes();
+      let s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById('clock').innerHTML =  h + ":" + m + ":" + s;
+      setTimeout(startTime, 1000);
+    }
+
+    function checkTime(i) {
+      if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+      return i;
+    }
+    </script>
+
+    <br>
+
+    <button title="Включить веб-камеру" style="background-image: linear-gradient(red, orange);color: white;border: none;width: 150px;height: 30px;cursor: pointer;" id="but" autoplay>
+        Включить веб-камеру
+    </button>
+&nbsp;&nbsp;&nbsp;
+    <input style="cursor: pointer;" onclick="check()" type="checkbox" id="myCheck"><label>Отображать текущий год, месяц, день, время на веб-камере /</label>&nbsp;<a onclick="uncheck()" style="color: red;" href="#убрать">Убрать</a>
+
+    <hr>
+
+    <div style="display: flex;align-items: center;"><p>Ⓒ Веб-камКА</p>&nbsp;&nbsp;<p id="YeAr"></p></div>
+
+    <script>
+    const yeAR = new Date();
+    document.getElementById("YeAr").innerHTML = yeAR.getFullYear();
+    </script>
+
+    <script>
+      function check() {
+  document.getElementById("displayyearmonthdayclock").style.display = "block";
+}
+    </script>
+
+    <script>
+      function uncheck() {
+  document.getElementById("myCheck").checked = false;
+  document.getElementById("displayyearmonthdayclock").style.display = "none";
+}
+    </script>
+
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let but = document.getElementById("but");
+        let video = document.getElementById("vid");
+        let mediaDevices = navigator.mediaDevices;
+        vid.muted = true;
+        but.addEventListener("click", () => {
+
+            // Accessing the user camera and video.
+            mediaDevices
+                .getUserMedia({
+                    video: true,
+                    audio: true,
+                })
+                .then((stream) => {
+                    // Changing the source of video to current stream.
+                    video.srcObject = stream;
+                    video.addEventListener("loadedmetadata", () => {
+                        video.play();
+                    });
+                })
+                .catch(alert);
+        });
+    });
+</script>
+
+</html>
